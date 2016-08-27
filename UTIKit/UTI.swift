@@ -50,14 +50,14 @@ public struct UTI: CustomStringConvertible, CustomDebugStringConvertible, Equata
 
     #if os(macOS)
     public init?(pasteBoardType: String, conformingToUTI: UTI? = nil) {
-        let conformingToUTIString: CFString? = conformingToUTI?.UTIString
-        guard let rawUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassNSPboardType, pasteBoardType, conformingToUTIString)?.takeRetainedValue() else { return nil }
+        let conformingToUTIString: CFString? = conformingToUTI?.UTIString as CFString?
+        guard let rawUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassNSPboardType, pasteBoardType as CFString, conformingToUTIString)?.takeRetainedValue() else { return nil }
         self.UTIString = rawUTI as String
     }
 
     public init?(OSType: String, conformingToUTI: UTI? = nil) {
-        let conformingToUTIString: CFString? = conformingToUTI?.UTIString
-        guard let rawUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassOSType, OSType, conformingToUTIString)?.takeRetainedValue() else { return nil }
+        let conformingToUTIString: CFString? = conformingToUTI?.UTIString as CFString?
+        guard let rawUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassOSType, OSType as CFString, conformingToUTIString)?.takeRetainedValue() else { return nil }
         self.UTIString = rawUTI as String
     }
     #endif
